@@ -766,10 +766,25 @@
             e.preventDefault();
             userEmail = document.getElementById('email-input').value;
             if (userEmail) {
-                // Here you would normally send the email to your server/Make.com webhook
-                console.log('Email captured:', userEmail);
-                console.log('Quiz answers:', answers);
-                console.log('Result type:', calculateResults());
+                // Send to Make.com webhook
+                fetch('https://hook.eu2.make.com/0vutvtetthrgqyvf5iil7uymkrpk0rww', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        result: calculateResults(),
+                        resultTitle: resultData[calculateResults()].title,
+                        answers: answers,
+                        timestamp: new Date().toISOString(),
+                        source: 'Fast Cash Bots Quiz'
+                    })
+                }).then(response => {
+                    console.log('Data sent to Make.com successfully');
+                }).catch(error => {
+                    console.error('Error sending to Make.com:', error);
+                });
                 
                 showResults();
             }
