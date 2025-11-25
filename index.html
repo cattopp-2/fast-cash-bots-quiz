@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Cash Bots Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', Georgia, serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: white;
+            border-radius: 50px;
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-number {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .option-button {
+            padding: 1.5rem;
+            background: white;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            line-height: 1.6;
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        .option-button:hover {
+            border-color: #667eea;
+            transform: translateX(8px);
+        }
+
+        .option-button.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 2rem;
+            color: white;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* Email Capture Styles */
+        .email-capture {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .email-capture-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            color: #667eea;
+        }
+
+        .email-capture h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .email-capture p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        .email-input:focus {
+            border-color: #667eea;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Results Styles */
+        .results-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .results-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .results-subtitle {
+            font-size: 1.5rem;
+            color: #6b7280;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .results-description {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .results-description p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        .results-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .results-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item svg {
+            color: #667eea;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .benefit-text {
+            font-size: 1.0625rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .example-card {
+            padding: 1.25rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .next-steps-box h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .next-steps-box ol {
+            padding-left: 1.5rem;
+        }
+
+        .next-steps-box li {
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 2rem;
+            background: #f9fafb;
+            border-radius: 16px;
+        }
+
+        .cta-box p {
+            font-size: 1.125rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px -5px rgba(102, 126, 234, 0.5);
+        }
+
+        .email-sent {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .center-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .quiz-card {
+                padding: 2rem;
+            }
+
+            .question-text {
+                font-size: 1.5rem;
+            }
+
+            .results-title {
+                font-size: 2rem;
+            }
+
+            .results-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-view" class="container">
+        <div class="header">
+            <h1>Which Fast Cash Bot Should You Build First?</h1>
+            <p>Discover which bot type will make the biggest impact in your business</p>
+        </div>
+
+        <div class="progress-bar-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <div class="quiz-card">
+            <div id="question-number" class="question-number"></div>
+            <h2 id="question-text" class="question-text"></h2>
+            <div id="options-container" class="options-container"></div>
+        </div>
+
+        <div class="footer-text">
+            Based on Cathy's Fast Cash Bots Framework
+        </div>
+    </div>
+
+    <div id="email-view" class="center-flex hidden">
+        <div class="email-capture">
+            <svg class="email-capture-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+            </svg>
+            
+            <h2>Get Your Personalized Results</h2>
+            
+            <p>Enter your email to see which Fast Cash Bot is perfect for your business, plus specific examples and next steps.</p>
+            
+            <form id="email-form">
+                <input 
+                    type="email" 
+                    id="email-input" 
+                    class="email-input" 
+                    placeholder="your@email.com" 
+                    required
+                />
+                <button type="submit" class="submit-button">Show Me My Results</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="results-view" class="container hidden">
+        <div class="results-container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <div class="results-badge">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                    </svg>
+                    Your Recommended Bot Type
+                </div>
+                
+                <h1 id="result-title" class="results-title"></h1>
+                <p id="result-subtitle" class="results-subtitle"></p>
+            </div>
+
+            <div class="results-description">
+                <p id="result-description"></p>
+            </div>
+
+            <div class="results-section">
+                <h2>Why This Works For You</h2>
+                <div id="benefits-container"></div>
+            </div>
+
+            <div class="results-section">
+                <h2>Examples You Could Build</h2>
+                <div id="examples-container"></div>
+            </div>
+
+            <div class="next-steps-box">
+                <h2>Your Next Steps</h2>
+                <ol id="steps-container"></ol>
+            </div>
+
+            <div class="cta-box">
+                <p id="cta-text"></p>
+                <button class="cta-button" onclick="window.open('https://yourwebtoolkit.com/contact', '_blank')">
+                    Book a Strategy Call
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="email-sent" class="email-sent"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                question: "What's your primary business model right now?",
+                options: [
+                    { text: "1:1 coaching or consulting", scores: { boost: 3, bridge: 2, build: 1 } },
+                    { text: "Group programs or courses", scores: { bridge: 3, boost: 2, build: 1 } },
+                    { text: "Mix of services with varying price points", scores: { bridge: 3, build: 2, boost: 1 } },
+                    { text: "Mostly free content, looking to monetize", scores: { build: 3, bridge: 2, boost: 0 } }
+                ]
+            },
+            {
+                id: 2,
+                question: "What's your biggest business challenge right now?",
+                options: [
+                    { text: "Getting new leads and growing my audience", scores: { build: 3, bridge: 1, boost: 0 } },
+                    { text: "Converting leads into paying clients", scores: { bridge: 3, build: 2, boost: 1 } },
+                    { text: "Helping clients get results between sessions", scores: { boost: 3, bridge: 1, build: 0 } },
+                    { text: "Scaling beyond 1:1 time", scores: { boost: 2, bridge: 3, build: 1 } }
+                ]
+            },
+            {
+                id: 3,
+                question: "What resources do you already have sitting on your hard drive?",
+                options: [
+                    { text: "Past trainings, workshops, or recorded sessions", scores: { boost: 2, bridge: 3, build: 2 } },
+                    { text: "Templates, worksheets, or frameworks I use with clients", scores: { boost: 3, bridge: 2, build: 1 } },
+                    { text: "Lead magnets or free resources", scores: { build: 2, bridge: 2, boost: 1 } },
+                    { text: "Internal docs, client notes, or my methodology written out", scores: { boost: 3, bridge: 2, build: 1 } }
+                ]
+            },
+            {
+                id: 4,
+                question: "When people engage with your free content, what happens?",
+                options: [
+                    { text: "They download it but I rarely hear from them again", scores: { build: 3, bridge: 2, boost: 0 } },
+                    { text: "They engage but don't buy", scores: { bridge: 3, build: 2, boost: 0 } },
+                    { text: "They become clients but struggle with implementation", scores: { boost: 3, bridge: 1, build: 0 } },
+                    { text: "I don't have much free content yet", scores: { build: 3, bridge: 1, boost: 0 } }
+                ]
+            },
+            {
+                id: 5,
+                question: "What would make the biggest difference in your business in the next 30 days?",
+                options: [
+                    { text: "More qualified leads in my pipeline", scores: { build: 3, bridge: 1, boost: 0 } },
+                    { text: "Better conversion from my existing audience", scores: { bridge: 3, build: 1, boost: 1 } },
+                    { text: "Clients getting faster, better results", scores: { boost: 3, bridge: 1, build: 0 } },
+                    { text: "A new income stream that doesn't require more 1:1 time", scores: { bridge: 3, boost: 2, build: 1 } }
+                ]
+            },
+            {
+                id: 6,
+                question: "How do people currently experience your methodology?",
+                options: [
+                    { text: "Through live sessions or calls", scores: { boost: 3, bridge: 2, build: 1 } },
+                    { text: "Through recorded courses or programs", scores: { bridge: 3, boost: 2, build: 1 } },
+                    { text: "Through free content and resources", scores: { build: 3, bridge: 2, boost: 0 } },
+                    { text: "Mix of formats", scores: { bridge: 2, boost: 2, build: 2 } }
+                ]
+            },
+            {
+                id: 7,
+                question: "What feedback do you hear most from your audience or clients?",
+                options: [
+                    { text: "I love your content but don't know where to start", scores: { build: 3, bridge: 2, boost: 0 } },
+                    { text: "I understand the concepts but struggle to implement", scores: { boost: 3, bridge: 2, build: 0 } },
+                    { text: "I'm ready to work with you but not sure which option fits", scores: { bridge: 3, build: 1, boost: 1 } },
+                    { text: "I need more support between our sessions", scores: { boost: 3, bridge: 1, build: 0 } }
+                ]
+            },
+            {
+                id: 8,
+                question: "What's your comfort level with trying new tech?",
+                options: [
+                    { text: "I'm excited to experiment and figure things out", scores: { build: 1, boost: 1, bridge: 1 } },
+                    { text: "I'm willing if it's not too complicated", scores: { build: 1, boost: 1, bridge: 1 } },
+                    { text: "I prefer simple, proven solutions", scores: { build: 1, boost: 1, bridge: 1 } },
+                    { text: "I'll try anything if it solves a real problem", scores: { build: 1, boost: 1, bridge: 1 } }
+                ]
+            }
+        ];
+
+        const resultData = {
+            build: {
+                title: "Build Bots",
+                subtitle: "Grow Your Audience with Interactive Tools",
+                description: "You're ready to create bots that bring new people into your world. Build Bots work as innovative lead magnets that show (not tell) how your methodology gets results.",
+                keyBenefits: [
+                    "Create freebies that actually convert",
+                    "Stand out with something your audience hasn't seen before",
+                    "Demonstrate your expertise interactively",
+                    "Build your email list with qualified leads"
+                ],
+                examples: [
+                    "A quiz bot that identifies where people are stuck and guides them to your resources",
+                    "An assessment tool that shows people exactly what they need (and positions your paid offer)",
+                    "A mini-tool that solves one specific problem and leaves them wanting more"
+                ],
+                nextSteps: [
+                    "Pick one outcome your ideal client wants (something that takes 5 minutes or less)",
+                    "Look through your existing free content - what could become interactive?",
+                    "Build a simple bot using ChatGPT Custom GPTs or Pickaxe",
+                    "Share it with your email list and watch the engagement"
+                ],
+                cta: "Start with one resource you've already created and turn it into a Build Bot that brings qualified leads into your world."
+            },
+            boost: {
+                title: "Boost Bots",
+                subtitle: "Help Clients Get Better Results",
+                description: "You're positioned perfectly for Boost Bots - tools that support your clients between sessions and help them implement what you're working on together.",
+                keyBenefits: [
+                    "Clients get results faster",
+                    "Scale your impact without more 1:1 time",
+                    "Differentiate your services from other coaches",
+                    "Reduce client support questions"
+                ],
+                examples: [
+                    "A bot that helps clients implement your framework between coaching calls",
+                    "A daily check-in tool that keeps clients accountable",
+                    "A resource that answers their common questions using your methodology",
+                    "An implementation assistant trained on your specific process"
+                ],
+                nextSteps: [
+                    "Identify the #1 thing clients struggle to implement between sessions",
+                    "Pull out templates, frameworks, or guidance you give repeatedly",
+                    "Create a bot that walks them through your process step-by-step",
+                    "Add it to your existing program or 1:1 package"
+                ],
+                cta: "Build a Boost Bot that helps your clients implement between sessions - you could add this to your offers this week."
+            },
+            bridge: {
+                title: "Bridge Bots",
+                subtitle: "Move People Through Your Offers",
+                description: "Bridge Bots are perfect for you - they help move people from awareness to purchase, or from one offer to the next. These are your conversion tools.",
+                keyBenefits: [
+                    "Convert more of your existing audience",
+                    "Create natural upgrade paths",
+                    "Add income without creating entirely new offers",
+                    "Help people self-select the right option"
+                ],
+                examples: [
+                    "A bot that helps people implement your low-ticket course (then upgrades them to coaching)",
+                    "A tool that helps them get quick wins (and shows them what's possible with your help)",
+                    "An assessment that shows people exactly which offer they need",
+                    "A mini-tool sold as a tripwire that leads to your core offer"
+                ],
+                nextSteps: [
+                    "Map your customer journey - where do people get stuck or drop off?",
+                    "Look at your existing offers - what could help with implementation?",
+                    "Create a bot that solves one piece of the puzzle (and naturally leads to the next)",
+                    "Price it as a bump offer, tripwire, or bundle with existing products"
+                ],
+                cta: "Create a Bridge Bot that moves people through your offers - this could add a new revenue stream within days."
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = {};
+        let userEmail = '';
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question-number').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.question;
+            
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-button';
+                button.textContent = option.text;
+                button.onclick = () => handleAnswer(option);
+                container.appendChild(button);
+            });
+            
+            updateProgress();
+        }
+
+        function handleAnswer(option) {
+            answers[currentQuestion] = option;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                setTimeout(displayQuestion, 300);
+            } else {
+                setTimeout(showEmailCapture, 300);
+            }
+        }
+
+        function showEmailCapture() {
+            document.getElementById('quiz-view').classList.add('hidden');
+            document.getElementById('email-view').classList.remove('hidden');
+        }
+
+        function calculateResults() {
+            const scores = { build: 0, boost: 0, bridge: 0 };
+            
+            Object.values(answers).forEach(answer => {
+                Object.entries(answer.scores).forEach(([type, score]) => {
+                    scores[type] += score;
+                });
+            });
+
+            const maxScore = Math.max(scores.build, scores.boost, scores.bridge);
+            
+            if (scores.build === maxScore) return 'build';
+            if (scores.boost === maxScore) return 'boost';
+            return 'bridge';
+        }
+
+        function showResults() {
+            const resultType = calculateResults();
+            const result = resultData[resultType];
+            
+            document.getElementById('email-view').classList.add('hidden');
+            document.getElementById('results-view').classList.remove('hidden');
+            
+            document.getElementById('result-title').textContent = result.title;
+            document.getElementById('result-subtitle').textContent = result.subtitle;
+            document.getElementById('result-description').textContent = result.description;
+            
+            const benefitsContainer = document.getElementById('benefits-container');
+            benefitsContainer.innerHTML = '';
+            result.keyBenefits.forEach(benefit => {
+                const div = document.createElement('div');
+                div.className = 'benefit-item';
+                div.innerHTML = `
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="benefit-text">${benefit}</span>
+                `;
+                benefitsContainer.appendChild(div);
+            });
+            
+            const examplesContainer = document.getElementById('examples-container');
+            examplesContainer.innerHTML = '';
+            result.examples.forEach(example => {
+                const div = document.createElement('div');
+                div.className = 'example-card';
+                div.textContent = example;
+                examplesContainer.appendChild(div);
+            });
+            
+            const stepsContainer = document.getElementById('steps-container');
+            stepsContainer.innerHTML = '';
+            result.nextSteps.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                stepsContainer.appendChild(li);
+            });
+            
+            document.getElementById('cta-text').textContent = result.cta;
+            document.getElementById('email-sent').textContent = `Results sent to: ${userEmail}`;
+        }
+
+        document.getElementById('email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            userEmail = document.getElementById('email-input').value;
+            if (userEmail) {
+                // Here you would normally send the email to your server/Make.com webhook
+                console.log('Email captured:', userEmail);
+                console.log('Quiz answers:', answers);
+                console.log('Result type:', calculateResults());
+                
+                showResults();
+            }
+        });
+
+        // Initialize quiz
+        displayQuestion();
+    </script>
+</body>
+</html>
