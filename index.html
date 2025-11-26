@@ -17,7 +17,7 @@
         body {
             font-family: 'Crimson Pro', Georgia, serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #215E8D;
             padding: 2rem;
         }
 
@@ -111,14 +111,74 @@
         }
 
         .option-button:hover {
-            border-color: #667eea;
+            border-color: #F6AD55;
             transform: translateX(8px);
         }
 
         .option-button.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             color: white;
             border: none;
+        }
+
+        /* Checkbox styles */
+        .checkbox-option {
+            padding: 1.5rem;
+            background: white;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            line-height: 1.6;
+            font-family: 'Crimson Pro', Georgia, serif;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checkbox-option:hover {
+            border-color: #F6AD55;
+            transform: translateX(8px);
+        }
+
+        .checkbox-option.selected {
+            background: #F6AD55;
+            color: white;
+            border: none;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .continue-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: #F6AD55;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Crimson Pro', Georgia, serif;
+        }
+
+        .continue-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(246, 173, 85, 0.4);
+        }
+
+        .continue-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .footer-text {
@@ -145,7 +205,7 @@
             width: 48px;
             height: 48px;
             margin: 0 auto 1.5rem;
-            color: #667eea;
+            color: #F6AD55;
         }
 
         .email-capture h2 {
@@ -175,12 +235,12 @@
         }
 
         .email-input:focus {
-            border-color: #667eea;
+            border-color: #F6AD55;
         }
 
         .submit-button {
             width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             color: white;
             border: none;
             padding: 1rem 2rem;
@@ -189,13 +249,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(246, 173, 85, 0.4);
             font-family: 'Crimson Pro', Georgia, serif;
         }
 
         .submit-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 15px 30px -5px rgba(246, 173, 85, 0.5);
         }
 
         /* Results Styles */
@@ -212,7 +272,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
@@ -226,7 +286,7 @@
         .results-title {
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -246,7 +306,7 @@
             padding: 2rem;
             border-radius: 16px;
             margin-bottom: 2rem;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #F6AD55;
         }
 
         .results-description p {
@@ -274,7 +334,7 @@
         }
 
         .benefit-item svg {
-            color: #667eea;
+            color: #F6AD55;
             flex-shrink: 0;
             margin-top: 0.125rem;
         }
@@ -297,7 +357,7 @@
         }
 
         .next-steps-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             padding: 2rem;
             border-radius: 16px;
             color: white;
@@ -336,7 +396,7 @@
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #F6AD55;
             color: white;
             border: none;
             padding: 1rem 2.5rem;
@@ -348,13 +408,60 @@
             align-items: center;
             gap: 0.5rem;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(246, 173, 85, 0.4);
             font-family: 'Crimson Pro', Georgia, serif;
+            text-decoration: none;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 15px 30px -5px rgba(246, 173, 85, 0.5);
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: #F6AD55;
+            border: 2px solid #F6AD55;
+        }
+
+        .cta-buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Crimson Pro', Georgia, serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateX(-4px);
+        }
+
+        .back-button.hidden {
+            display: none;
+        }
+
+        .quiz-card {
+            position: relative;
         }
 
         .email-sent {
@@ -418,6 +525,12 @@
         </div>
 
         <div class="quiz-card">
+            <button id="back-button" class="back-button hidden" onclick="goBack()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back
+            </button>
             <div id="question-number" class="question-number"></div>
             <h2 id="question-text" class="question-text"></h2>
             <div id="options-container" class="options-container"></div>
@@ -434,7 +547,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
             </svg>
             
-            <h2>Get Your Personalized Results</h2>
+            <h2>Get Your Personalised Results</h2>
             
             <p>Enter your email to see which Fast Cash Bot is perfect for your business, plus specific examples and next steps.</p>
             
@@ -486,12 +599,20 @@
 
             <div class="cta-box">
                 <p id="cta-text"></p>
-                <button class="cta-button" onclick="window.open('https://yourwebtoolkit.com/contact', '_blank')">
-                    Book a Strategy Call
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                    </svg>
-                </button>
+                <div class="cta-buttons-container">
+                    <button class="cta-button" onclick="window.open('https://copywriterinyourpocket.com/ai-strategy-session', '_blank')">
+                        Book a Strategy Call
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </button>
+                    <button class="cta-button secondary" onclick="window.open('https://copywriterinyourpocket.com/build-custom-bots', '_blank')">
+                        Learn to Build Bots
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
             <div id="email-sent" class="email-sent"></div>
@@ -522,12 +643,15 @@
             },
             {
                 id: 3,
-                question: "What resources do you already have sitting on your hard drive?",
+                question: "What resources do you already have? (Select all that apply)",
+                type: "checkbox",
                 options: [
                     { text: "Past trainings, workshops, or recorded sessions", scores: { boost: 2, bridge: 3, build: 2 } },
-                    { text: "Templates, worksheets, or frameworks I use with clients", scores: { boost: 3, bridge: 2, build: 1 } },
+                    { text: "Templates, worksheets, or frameworks", scores: { boost: 3, bridge: 2, build: 1 } },
                     { text: "Lead magnets or free resources", scores: { build: 2, bridge: 2, boost: 1 } },
-                    { text: "Internal docs, client notes, or my methodology written out", scores: { boost: 3, bridge: 2, build: 1 } }
+                    { text: "Internal docs, client notes, or written methodology", scores: { boost: 3, bridge: 2, build: 1 } },
+                    { text: "I have ideas for new resources", scores: { build: 3, bridge: 1, boost: 0 } },
+                    { text: "I don't have any existing resources", scores: { build: 2, bridge: 1, boost: 0 } }
                 ]
             },
             {
@@ -568,16 +692,6 @@
                     { text: "I understand the concepts but struggle to implement", scores: { boost: 3, bridge: 2, build: 0 } },
                     { text: "I'm ready to work with you but not sure which option fits", scores: { bridge: 3, build: 1, boost: 1 } },
                     { text: "I need more support between our sessions", scores: { boost: 3, bridge: 1, build: 0 } }
-                ]
-            },
-            {
-                id: 8,
-                question: "What's your comfort level with trying new tech?",
-                options: [
-                    { text: "I'm excited to experiment and figure things out", scores: { build: 1, boost: 1, bridge: 1 } },
-                    { text: "I'm willing if it's not too complicated", scores: { build: 1, boost: 1, bridge: 1 } },
-                    { text: "I prefer simple, proven solutions", scores: { build: 1, boost: 1, bridge: 1 } },
-                    { text: "I'll try anything if it solves a real problem", scores: { build: 1, boost: 1, bridge: 1 } }
                 ]
             }
         ];
@@ -665,27 +779,102 @@
             document.getElementById('progress-bar').style.width = progress + '%';
         }
 
+        function goBack() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
         function displayQuestion() {
             const question = questions[currentQuestion];
             document.getElementById('question-number').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             document.getElementById('question-text').textContent = question.question;
             
+            // Show/hide back button
+            const backButton = document.getElementById('back-button');
+            if (currentQuestion === 0) {
+                backButton.classList.add('hidden');
+            } else {
+                backButton.classList.remove('hidden');
+            }
+            
             const container = document.getElementById('options-container');
             container.innerHTML = '';
             
-            question.options.forEach((option, index) => {
-                const button = document.createElement('button');
-                button.className = 'option-button';
-                button.textContent = option.text;
-                button.onclick = () => handleAnswer(option);
-                container.appendChild(button);
-            });
+            if (question.type === 'checkbox') {
+                // Checkbox question
+                const selectedOptions = [];
+                
+                question.options.forEach((option, index) => {
+                    const label = document.createElement('label');
+                    label.className = 'checkbox-option';
+                    
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.value = index;
+                    checkbox.onchange = (e) => {
+                        if (e.target.checked) {
+                            selectedOptions.push(option);
+                            label.classList.add('selected');
+                        } else {
+                            const idx = selectedOptions.indexOf(option);
+                            if (idx > -1) selectedOptions.splice(idx, 1);
+                            label.classList.remove('selected');
+                        }
+                        continueBtn.disabled = selectedOptions.length === 0;
+                    };
+                    
+                    const span = document.createElement('span');
+                    span.textContent = option.text;
+                    
+                    label.appendChild(checkbox);
+                    label.appendChild(span);
+                    container.appendChild(label);
+                });
+                
+                const continueBtn = document.createElement('button');
+                continueBtn.className = 'continue-button';
+                continueBtn.textContent = 'Continue';
+                continueBtn.disabled = true;
+                continueBtn.onclick = () => handleCheckboxAnswer(selectedOptions);
+                container.appendChild(continueBtn);
+            } else {
+                // Regular single-choice question
+                question.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'option-button';
+                    button.textContent = option.text;
+                    button.onclick = () => handleAnswer(option);
+                    container.appendChild(button);
+                });
+            }
             
             updateProgress();
         }
 
         function handleAnswer(option) {
             answers[currentQuestion] = option;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                setTimeout(displayQuestion, 300);
+            } else {
+                setTimeout(showEmailCapture, 300);
+            }
+        }
+
+        function handleCheckboxAnswer(selectedOptions) {
+            // Combine scores from all selected options
+            const combinedScores = { build: 0, boost: 0, bridge: 0 };
+            selectedOptions.forEach(option => {
+                Object.entries(option.scores).forEach(([type, score]) => {
+                    combinedScores[type] += score;
+                });
+            });
+            
+            // Store as an object with scores for the calculate function
+            answers[currentQuestion] = { scores: combinedScores, options: selectedOptions };
             
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
@@ -769,6 +958,7 @@
                 // Send to Make.com webhook
                 fetch('https://hook.eu2.make.com/0vutvtetthrgqyvf5iil7uymkrpk0rww', {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -781,7 +971,7 @@
                         source: 'Fast Cash Bots Quiz'
                     })
                 }).then(response => {
-                    console.log('Data sent to Make.com successfully');
+                    console.log('Data sent to Make.com successfully (no-cors mode)');
                 }).catch(error => {
                     console.error('Error sending to Make.com:', error);
                 });
