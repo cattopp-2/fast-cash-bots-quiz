@@ -117,8 +117,9 @@
 
         .option-button.selected {
             background: #F6AD55;
-            color: white;
+            color: black;
             border: none;
+            font-weight: 600;
         }
 
         /* Checkbox styles */
@@ -147,8 +148,9 @@
 
         .checkbox-option.selected {
             background: #F6AD55;
-            color: white;
+            color: black;
             border: none;
+            font-weight: 600;
         }
 
         .checkbox-option input[type="checkbox"] {
@@ -161,7 +163,7 @@
             margin-top: 2rem;
             padding: 1rem 2rem;
             background: #F6AD55;
-            color: white;
+            color: black;
             border: none;
             border-radius: 12px;
             font-size: 1.125rem;
@@ -179,6 +181,45 @@
         .continue-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+
+        .nav-button {
+            padding: 1rem 2rem;
+            background: #F6AD55;
+            color: black;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Crimson Pro', Georgia, serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(246, 173, 85, 0.4);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.back-nav {
+            background: white;
+            border: 2px solid #F6AD55;
+            color: black;
         }
 
         .footer-text {
@@ -241,7 +282,7 @@
         .submit-button {
             width: 100%;
             background: #F6AD55;
-            color: white;
+            color: black;
             border: none;
             padding: 1rem 2rem;
             border-radius: 12px;
@@ -397,7 +438,7 @@
 
         .cta-button {
             background: #F6AD55;
-            color: white;
+            color: black;
             border: none;
             padding: 1rem 2.5rem;
             border-radius: 50px;
@@ -420,7 +461,7 @@
 
         .cta-button.secondary {
             background: white;
-            color: #F6AD55;
+            color: black;
             border: 2px solid #F6AD55;
         }
 
@@ -429,35 +470,6 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Crimson Pro', Georgia, serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateX(-4px);
-        }
-
-        .back-button.hidden {
-            display: none;
         }
 
         .quiz-card {
@@ -525,12 +537,6 @@
         </div>
 
         <div class="quiz-card">
-            <button id="back-button" class="back-button hidden" onclick="goBack()">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-                Back
-            </button>
             <div id="question-number" class="question-number"></div>
             <h2 id="question-text" class="question-text"></h2>
             <div id="options-container" class="options-container"></div>
@@ -600,16 +606,16 @@
             <div class="cta-box">
                 <p id="cta-text"></p>
                 <div class="cta-buttons-container">
-                    <button class="cta-button" onclick="window.open('https://copywriterinyourpocket.com/ai-strategy-session', '_blank')">
-                        Book a Strategy Call
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </button>
-                    <button class="cta-button secondary" onclick="window.open('https://copywriterinyourpocket.com/build-custom-bots', '_blank')">
+                    <button class="cta-button" onclick="window.open('https://copywriterinyourpocket.com/build-custom-bots', '_blank')">
                         Learn to Build Bots
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </button>
+                    <button class="cta-button secondary" onclick="window.open('https://copywriterinyourpocket.com/ai-strategy-session', '_blank')">
+                        Book a Strategy Call
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                     </button>
                 </div>
@@ -791,14 +797,6 @@
             document.getElementById('question-number').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             document.getElementById('question-text').textContent = question.question;
             
-            // Show/hide back button
-            const backButton = document.getElementById('back-button');
-            if (currentQuestion === 0) {
-                backButton.classList.add('hidden');
-            } else {
-                backButton.classList.remove('hidden');
-            }
-            
             const container = document.getElementById('options-container');
             container.innerHTML = '';
             
@@ -833,21 +831,92 @@
                     container.appendChild(label);
                 });
                 
+                // Add navigation buttons
+                const navButtons = document.createElement('div');
+                navButtons.className = 'nav-buttons';
+                
+                // Back button
+                if (currentQuestion > 0) {
+                    const backBtn = document.createElement('button');
+                    backBtn.className = 'nav-button back-nav';
+                    backBtn.innerHTML = `
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        Back
+                    `;
+                    backBtn.onclick = goBack;
+                    navButtons.appendChild(backBtn);
+                }
+                
+                // Continue button
                 const continueBtn = document.createElement('button');
-                continueBtn.className = 'continue-button';
-                continueBtn.textContent = 'Continue';
+                continueBtn.className = 'nav-button';
+                continueBtn.innerHTML = `
+                    Continue
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                `;
                 continueBtn.disabled = true;
                 continueBtn.onclick = () => handleCheckboxAnswer(selectedOptions);
-                container.appendChild(continueBtn);
+                navButtons.appendChild(continueBtn);
+                
+                container.appendChild(navButtons);
             } else {
                 // Regular single-choice question
+                let selectedOption = null;
+                
                 question.options.forEach((option, index) => {
                     const button = document.createElement('button');
                     button.className = 'option-button';
                     button.textContent = option.text;
-                    button.onclick = () => handleAnswer(option);
+                    button.onclick = () => {
+                        // Deselect all buttons
+                        container.querySelectorAll('.option-button').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                        // Select this button
+                        button.classList.add('selected');
+                        selectedOption = option;
+                        continueBtn.disabled = false;
+                    };
                     container.appendChild(button);
                 });
+                
+                // Add navigation buttons
+                const navButtons = document.createElement('div');
+                navButtons.className = 'nav-buttons';
+                
+                // Back button
+                if (currentQuestion > 0) {
+                    const backBtn = document.createElement('button');
+                    backBtn.className = 'nav-button back-nav';
+                    backBtn.innerHTML = `
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        Back
+                    `;
+                    backBtn.onclick = goBack;
+                    navButtons.appendChild(backBtn);
+                }
+                
+                // Continue button
+                const continueBtn = document.createElement('button');
+                continueBtn.className = 'nav-button';
+                continueBtn.textContent = 'Continue';
+                continueBtn.disabled = true;
+                continueBtn.onclick = () => handleAnswer(selectedOption);
+                continueBtn.innerHTML = `
+                    Continue
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                `;
+                navButtons.appendChild(continueBtn);
+                
+                container.appendChild(navButtons);
             }
             
             updateProgress();
